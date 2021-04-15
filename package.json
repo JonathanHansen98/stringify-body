@@ -1,0 +1,20 @@
+{
+  "name": "stringify-body",
+  "version": "1.0.7",
+  "description": "Creates test json files suitable for serverless AWS lambda functions.",
+  "main": "index.js",
+  "repository": "https://github.com/JonathanHansen98/stringify-body",
+  "categories": [
+    "Testing"
+  ],
+  "keywords": [
+    "serverless",
+    "aws",
+    "lambda"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JonathanHansen98",
+  "license": "MIT"
+}
