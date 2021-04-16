@@ -1,5 +1,4 @@
 const fs = require("fs").promises;
-const path = require("path");
 
 /**
  *  Creates test files suitable for passing as test data to serverless lambda functions.
@@ -28,6 +27,14 @@ const sb = async (fileName, obj, options) => {
   try {
     let testDir = options?.dirName ?? "tests";
 
+    if (!fileName) {
+      throw new Error(`Filename is required, recieved: ${fileName}`);
+    }
+
+    if (!obj || typeof obj !== "object") {
+      throw new Error("2nd parameter is required and must be a javascript object.");
+    }
+
     await fs.mkdir(testDir, { recursive: true });
 
     await fs.writeFile(
@@ -39,6 +46,7 @@ const sb = async (fileName, obj, options) => {
     return "file written succefully";
   } catch (error) {
     console.log(error);
+    return error;
   }
 };
 
