@@ -1,47 +1,58 @@
 # stringify-body
 
-<div style="display: flex; justify-content: space-around;">
-<img src="https://img.shields.io/badge/code%20coverage-100%25-35cade"> 
 <img src="https://img.shields.io/badge/dependencies-0-35cade"> 
-<img src="https://img.shields.io/badge/unpacked%20size-4.38kb-35cade"> 
-</div>
-
 
 ## Description <span id="d"></span> 
   Creates test json files suitable for serverless AWS lambda functions. Files will be created in a directory called "tests".
-
-## Installation
-  Install via npm:
-  ```
-  $ npm i -D stringify-body
-  ```
  
 ## Usage
-1. In the root of your AWS lambda microservice, in `createTest.js`:
+1. In the root of your AWS lambda microservice, create a javascript file to create the templates for your test json files. Each module propery that is exported from this javascript file will be created as its own json file with the `tests` directory.
 
-  ```
-  const sb = require("stringify-body");
+```
+// templates.js
 
-  let options = {dirName: "customDirectory"}
+module.exports.myFile = {
+  someData: ["blah", "blah", "blah"] 
+};
+```
 
-  (async () => {
-    await sb("myTestFile", {...}, options);
-  })()
-  ```
+2. Run `stringify-body`, passing the path to the file containing your templates with the `-p` or `--path` flag. Optionally, you can define a custom output directory name with the `-d` or `--directory` flag, the default output directory is `tests`
 
-2. Run this file from your console, this will create a json file located at `customDirectory/myTestFile.json`.
+```
+npx stringify-body -p templates.js
+```
 
-  ```
-  $ node createTest.js
-  ```
+Output:
+<br/>
+<img src="https://i.imgur.com/aGtP95O.png" width='250px'>
 
-3. You can now specify a route to this file when invoking a lambda function locally using serverless with the following command:
+3. You can now pass the path to your test json file to a serverless lambda function when invoking locally
 
-  ```
-  $ sls invoke local --function myFunction --path customDirectory/myTestFile.json
-  ```
+```
+sls invoke local --function myFunction --path tests/myFile.json
+```
 
-4. `createTest.js` can now be deleted or added to the `exclude` section of your `serverless.yml` file.
+### Nested Directorys
+
+For better organization, you may want to nest certain files together in a nested directory. This is acheivable by prefixing the exported module property with a `$`. Then, each property within that object will generate its own json file nested beneath the parent directory.
+
+```
+// templates.js
+
+module.exports.$nestedDirectory = {
+  nestedFile: {
+    someData: ["blah", "blah", "blah"] 
+  },
+  secondNestedFile: {
+    someData: ["bing", "bang", "pow"] 
+  }
+}
+```
+
+Output:
+<br/>
+<img src="https://i.imgur.com/5nhFznR.png" width='250px'>
+
 
 ## Notes
 
