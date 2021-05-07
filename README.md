@@ -1,8 +1,11 @@
 # stringify-body
 
+<div style="display: flex; justify-content: space-around;">
 <img src="https://img.shields.io/badge/code%20coverage-100%25-35cade"> 
 <img src="https://img.shields.io/badge/dependencies-0-35cade"> 
-<img src="https://img.shields.io/badge/unpacked%20size-3.11kb-35cade"> 
+<img src="https://img.shields.io/badge/unpacked%20size-4.38kb-35cade"> 
+</div>
+
 
 ## Description <span id="d"></span> 
   Creates test json files suitable for serverless AWS lambda functions. Files will be created in a directory called "tests".

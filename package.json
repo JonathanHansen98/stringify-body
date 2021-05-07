@@ -1,6 +1,6 @@
 {
   "name": "stringify-body",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Creates test json files suitable for serverless AWS lambda functions.",
   "main": "index.js",
   "repository": "https://github.com/JonathanHansen98/stringify-body",
@@ -17,7 +17,5 @@
   },
   "author": "JonathanHansen98",
   "license": "MIT",
-  "devDependencies": {
-    "jest": "^26.6.3"
-  }
+  "devDependencies": {}
 }
